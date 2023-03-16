@@ -18,6 +18,7 @@
 #' summarY(object=xs, multi = TRUE)
 #' @export
 
+
 VIFsM <- function(Data, multi=FALSE,maxim = 4){   # argument is a matrix of the predictor variables
 
   VIF <- NULL

@@ -111,7 +111,6 @@ Plot(x = xs,maxx = 4)
 
 ### When Interested in checking the VIF of the data and dropping the variable with VIF > maxim
 
-
 ```{r, fig.height=12, fig.width=10}
 # Find VIF values
 

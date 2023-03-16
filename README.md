@@ -8,6 +8,7 @@ The main funtion is  VIFsM() which finds the VIF values for the variables. The o
 
 ### When Interested in the VIF of the current data (multi = FALSE, as in default)
 
+
 ```{r setup}
 
 # load the VIFpkg pacakge
