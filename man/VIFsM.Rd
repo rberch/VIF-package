@@ -10,7 +10,7 @@ VIFsM(Data, multi = FALSE, maxim = 4)
 
 Plot(x, maxx = 4, multi = FALSE, ...)
 
-summarY(object, multi = FALSE, ...)
+summarY(object, multi = FALSE)
 }
 \arguments{
 \item{Data}{a dataframe or matrix of predictors}

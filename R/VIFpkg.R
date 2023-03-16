@@ -173,7 +173,7 @@ Plot <- function(x, maxx = 4,multi = FALSE,...){
 #' @param multi logical stating whether to drop the variable with VIF greater than maxim, and proceed to recompute VIF until no multicollinearity exist based on maxim value defined. Default is FALSE, which just computes the VIF of the current data
 #'
 #' @export
-summarY <- function(object,multi = FALSE,...){
+summarY <- function(object,multi = FALSE){
 
   if(!multi){
 
