@@ -14,5 +14,9 @@ Imports:
    data.table,
    ggplot2,
    gridExtra
-Suggests: MASS
+Suggests: 
+    knitr,
+    MASS,
+    rmarkdown
 RoxygenNote: 7.2.3
+VignetteBuilder: knitr

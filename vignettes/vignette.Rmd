@@ -1,0 +1,138 @@
+---
+title: "Computing Variance Inflation Factor (VIF) of predictor variables"
+author: "Ransmond Berchie"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Computing Variance Inflation Factor (VIF) of predictor variables}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+  
+  
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# The R VIFpkg Package
+
+
+
+## Multicollinearity & Varaince Inflation Factor (VIF)
+
+In Statistics, multicollinearity exists when a predictor in a multiple regression model can be linearly predicted from the other predictors with a considerable degree of accuracy. Thus, this is a phenomenon in which two or more predictor variable in a multiple regression model are highly or moderately correlated with one another.
+
+When multicollinearity exists, it can ruin our analysis and hence limit conclusions we can draw from our results. It existence can aggravate the following outcomes in our analysis:
+  
+  
+  * The estimated regression coefficient of any one predictor variable will depend on which other predictor variables are included in the model.
+
+* As more predictor variables are added to the model, the precision of the estimated regression coefficients decreases.
+
+* The predictor variables already in the model determines the marginal contribution of any one predictor variable in reducing the error sum of squares.
+
+* Hypothesis tests for $\beta_k = 0$ may yield different conclusions depending on which predictor variables are in the model.
+
+
+
+Multicollinearity is a major issue in observational studies, since researchers just observe values of the predictor variables without any control over them.
+
+
+We can detect if multicollinearity is present in our data using these common methods:
+  
+  
+  * The analysis exhibits the signs of multicollinearity — for instance, the estimates of coefficients vary excessively from model to model.
+
+* The t-tests for each of the individual slopes are non-significant $(P > 0.05)$, but the overall F-test for testing all of the slopes are simultaneously $0$ is significant $(P < 0.05)$.
+
+* The correlations among pairs of predictor variables are large.
+
+
+
+
+
+However, it may not be enough to rely of correlations among pairs of predictors to detect multicollinearity. This is because pairwise correlations may be small, but there might be a linear dependence among three or more variables. For example, $X_1 = 3X_2 + 6X_3 + error$.
+
+In view of this, many analysts use the \textbf{variance inflation factor (VIF)} to help detect multicollinearity.
+
+
+## Variance Inflation Factor
+
+The VIF quantifies how much the variance s inflated. When multicollinearity exists, the variance of the estimated coefficients are inflated (i.e., the precision of the estimated regression coefficients decreases). In a multiple regression model, the VIF $(VIF_j)$ for an estimated regression coefficient $(\hat{\beta_j})$ is the factor by which the variance of $\hat{\beta_j}$ is inflated due to the existence of correlation among the predictor variables in the model. 
+
+The VIF for predictor $j$ is calculated as;
+
+$$VIF_j = \frac{1}{1 - R^2_j}$$
+  
+  
+  Where, $R^2_j$ is the Coefficient of Determination ($R^2$ value) for regressing predictor $j$ against all other predictor variables.
+
+A VIF of value 1 indicates that there is no correlation among the $j^{th}$ predictor and the remaining predictor variables(i.e., the variance of predictor $j$ is not inflated). As a general rule of thumb, VIFs greater than 4 calls for investigation, and VIFs exceeding 10 indicates serious multicollinearity.
+
+
+## Using the VIFsM() function to find VIF on a predictor dataset in R
+
+
+### When Interested in the VIF of the current data (multi = FALSE, as in default)
+
+```{r setup}
+
+# load the VIFpkg pacakge
+
+library(VIFpkg)
+
+# Using Boston data from MASS package for our example
+
+df <- data.frame(MASS::Boston[,-1])
+
+# Find VIF values
+
+xs <- VIFsM(df, multi=FALSE,maxim = 4)
+
+# View the results
+
+summarY(object=xs)
+
+
+# Plot the VIF values
+
+Plot(x = xs,maxx = 4)
+
+
+
+
+
+```
+
+
+
+### When Interested in checking the VIF of the data and dropping the variable with VIF > maxim
+
+
+```{r, fig.height=12, fig.width=10}
+# Find VIF values
+
+xs <- VIFsM(df, multi=TRUE,maxim = 4)
+
+# View the results
+
+summarY(object=xs, multi = TRUE)
+
+
+# Plot the VIF values
+
+Plot(x = xs,multi = TRUE, maxx = 4)
+
+```
+
+
+
+***Sources***
+  
+  * https://online.stat.psu.edu/stat462/node/180/
+  
+  * https://en.wikipedia.org/wiki/Multicollinearity
+
