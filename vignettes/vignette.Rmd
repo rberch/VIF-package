@@ -75,10 +75,42 @@ A VIF of value 1 indicates that there is no correlation among the $j^{th}$ predi
 
 ## Using the VIFsM() function to find VIF on a predictor dataset in R
 
+### Functions
+
+VIFsM(Data, multi = FALSE, maxim = 4)
+
+
+Plot(x, maxx = 4, multi = FALSE, ...)
+
+
+summarY(object, multi = FALSE, ...)
+
+
+
+
+***Arguments***
+
+```{r, echo=FALSE}
+
+dat.describe <- data.frame(Argument= c("Data",
+"multi", "maxim", "x", "maxim", "..."), Description = c("a dataframe or matrix of predictors",
+"logical stating whether to drop the variable with VIF greater than maxim, and proceed to recompute VIF until no multicollinearity exist based on maxim value defined. Default is FALSE, which just computes the VIF of the current data",
+"numeric value. The maximum acceptable VIF value. Predictor variables are sequentially kicked out of the model if they have VIF greater than the maxim when multi = TRUE. Default is value 4.", "object of class VIFsM", "numeric value. The maximum acceptable VIF value. Predictor variables are sequentially kicked out of the model if they have VIF greater than the maxim when multi = TRUE. Default is value 4.", "Further arguments passed to ggplot2") )
+
+
+kableExtra::kable(dat.describe)
+```
+
+
+## Usage of functions
 
 ### When Interested in the VIF of the current data (multi = FALSE, as in default)
 
 ```{r setup}
+
+# Install package
+
+# install.packages("VIFpkg_0.1.0.tar.gz", repos = NULL)
 
 # load the VIFpkg pacakge
 
